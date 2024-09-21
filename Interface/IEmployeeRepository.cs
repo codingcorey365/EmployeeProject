@@ -2,7 +2,7 @@
 
 namespace EmployeeProject.Interface;
 
-public interface IEmployeeInterface
+public interface IEmployeeRepository
 {
     public void CreateEmployee(Employee employeeToInsert);
     public Employee GetEmployeeById(int id);

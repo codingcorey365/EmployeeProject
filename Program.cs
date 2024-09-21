@@ -1,3 +1,8 @@
+using EmployeeProject.Interface;
+using EmployeeProject.Repository;
+using MySql.Data.MySqlClient;
+using System.Data;
+
 namespace EmployeeProject
 {
     public class Program
@@ -9,6 +14,14 @@ namespace EmployeeProject
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddScoped<IDbConnection>((s) =>
+            {
+                IDbConnection connection = new MySqlConnection(builder.Configuration.GetConnectionString("DefaultConnection"));
+                connection.Open();
+                return connection;
+            });
+
+            builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,6 +44,8 @@ namespace EmployeeProject
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
+
         }
     }
 }

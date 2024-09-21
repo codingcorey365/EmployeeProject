@@ -7,10 +7,10 @@ namespace EmployeeProject.Controllers
     public class EmployeeController : Controller
     {
         // Dependency Injection Employee Repository
-        private readonly IEmployeeInterface _repo;
+        private readonly IEmployeeRepository _repo;
 
         // Constructor to set the connection to private
-        public EmployeeController(IEmployeeInterface repo)
+        public EmployeeController(IEmployeeRepository repo)
         {
             _repo = repo;
         }

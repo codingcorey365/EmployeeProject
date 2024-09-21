@@ -5,7 +5,7 @@ using System.Data;
 
 namespace EmployeeProject.Repository;
 
-public class EmployeeRepository : IEmployeeInterface
+public class EmployeeRepository : IEmployeeRepository
 {
     // Create encapsulation
     // This is a field
