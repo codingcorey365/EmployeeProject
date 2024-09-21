@@ -1,9 +1,10 @@
-﻿@model Employee
+﻿@using Org.BouncyCastle.Crypto.Engines
+@model Employee
 
 <h3>Employee Information</h3>
 
 
-<table class="table table-bordered text-nowrap">
+<table class="table table-bordered text-center text-nowrap">
     <tr class=".text-nowrap class">
         <th>EmployeeId</th>
         <th>First Name</th>
@@ -21,16 +22,17 @@
         <th>Hours Worked</th>
     </tr>
     <tr>
-        <td>@Model.FirstName</td>
-        <td>@Model.MiddleName</td>
-        <td>@Model.LastName</td>
+        <td>@Model.EmployeeId</td>
+        <td class="border-end text-start ps-2">@Model.FirstName</td>
+        <td class="border-end text-start ps-2">@Model.MiddleName</td>
+        <td class="border-end text-start ps-2">@Model.LastName</td>
         <td>@Model.BirthMonth</td>
         <td>@Model.BirthDay</td>
         <td>@Model.BirthYear</td>
         <td>@Model.Age</td>
         <td>@Model.PhoneNumber</td>
-        <td>@Model.EmailAddress</td>
-        <td>@Model.HomeAddress</td>
+        <td class ="text-start ps-2">@Model.EmailAddress</td>
+        <td class="text-start ps-2">@Model.HomeAddress</td>
         <td>@Model.PayRate</td>
         <td>@Model.EmployeeDepartment</td>
         <td>@Model.HoursWorked</td>

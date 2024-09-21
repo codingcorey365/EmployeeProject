@@ -12,8 +12,8 @@
 </div>
 
 <div id="wrapper">
-    <table>
-        <thead>
+    <table class="table-responsive-sm text-nowrap">
+        <thead class="sticky-top">
             <tr>
                 <th>ID</th>
                 <th>First Name</th>
@@ -27,7 +27,7 @@
                 <th>Email Address</th>
                 <th>Home Address</th>
                 <th>Pay Rate</th>
-                <th>Employee Department</th>
+                <th>Department</th>
                 <th>Hours Worked</th>
             </tr>
         </thead>
@@ -38,18 +38,18 @@
                 <td>
                     <a href="/Employee/ViewSingleEmployee/@employeesInList.EmployeeId">@employeesInList.EmployeeId</a>
                 </td>
-                <td class="border-end">@employeesInList.FirstName</td>
-                <td class="border-end">@employeesInList.MiddleName</td>
-                <td class="border-end">@employeesInList.LastName</td>
+                <td class="border-end text-start ps-2">@employeesInList.FirstName</td>
+                <td class="border-end text-start ps-2">@employeesInList.MiddleName</td>
+                <td class="border-end text-start ps-2">@employeesInList.LastName</td>
                 <td class="border-end">@employeesInList.BirthMonth</td>
                 <td class="border-end">@employeesInList.BirthDay</td>
                 <td class="border-end">@employeesInList.BirthYear</td>
                 <td class="border-end">@employeesInList.Age</td>
                 <td class="border-end">@employeesInList.PhoneNumber</td>
-                <td class="border-end">@employeesInList.EmailAddress</td>
-                <td class="border-end">@employeesInList.HomeAddress</td>
+                <td class="border-end text-start ps-2">@employeesInList.EmailAddress</td>
+                <td class="border-end text-start ps-2">@employeesInList.HomeAddress</td>
                 <td class="border-end">@employeesInList.PayRate</td>
-                <td class="border-end">@employeesInList.EmployeeDepartment</td>
+                <td class="border-end text-start ps-2ss">@employeesInList.EmployeeDepartment</td>
                 <td class="border-end">@employeesInList.HoursWorked</td>
             </tr>
         }

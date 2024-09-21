@@ -2,7 +2,7 @@
 #wrapper {
     width: 1500px;
     height: 340px;
-    overflow: auto;
+    overflow: scroll;
 }
 /*Groups*/
 
