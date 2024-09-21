@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Employee>
+﻿@using Org.BouncyCastle.Asn1.Ocsp
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<Employee>
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/Employee/GetAllEmployees.css" asp-append-version="true" />
@@ -10,6 +12,22 @@
 <div style="display: block">
     <a href="/Employee/ViewSingleEmployee/">View Employee</a>
 </div>
+
+<!-- Search Bar -->
+<form asp-controller="Employee" asp-action="GetAllEmployees" method="get">
+    <div class="input-group mb-3">
+        <input type="text" name="searchString" class="form-control" placeholder="Search employees..." />
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
+
+@if (!string.IsNullOrEmpty(ViewContext.HttpContext.Request.Query["searchString"]))
+{
+    <div>
+        <a asp-action="GetAllEmployees" class="btn btn-secondary">Back to Full List</a>
+    </div>
+}
+
 
 <div id="wrapper">
     <table class="table-responsive-sm text-nowrap">

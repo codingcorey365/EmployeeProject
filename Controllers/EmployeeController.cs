@@ -47,11 +47,40 @@ namespace EmployeeProject.Controllers
         /*----------*/
 
         // Get All Employees
-        public IActionResult GetAllEmployees()
+
+        public IActionResult GetAllEmployees(string searchString)
         {
             var employees = _repo.GetAllEmployees();
+
+            // Apply search filter if searchString is provided
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                employees = employees.Where(e =>
+                        e.FirstName.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                        e.MiddleName.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                        e.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                        e.BirthDay.ToString().Contains(searchString) ||
+                        e.BirthMonth.ToString().Contains(searchString) ||
+                        e.BirthYear.ToString().Contains(searchString) ||
+                        e.Age.ToString().Contains(searchString) ||
+                        e.PhoneNumber.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                        e.EmailAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                        e.HomeAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                        e.EmployeeDepartment.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                        e.EmployeeTitle.ToString().Contains(searchString) ||
+                        e.PayRate.ToString().Contains(searchString) ||
+                        e.HoursWorked.ToString().Contains(searchString))
+                    .ToList();
+            }
+
             return View(employees);
         }
+
+        //public IActionResult GetAllEmployees()
+        //{
+        //    var employees = _repo.GetAllEmployees();
+        //    return View(employees);
+        //}
 
         // View A Single Employee
         public IActionResult ViewSingleEmployee(int id)
