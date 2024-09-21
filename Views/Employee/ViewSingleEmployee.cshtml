@@ -1,5 +1,50 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Employee
+
+<h3>Employee Information</h3>
+
+
+<table class="table table-bordered text-nowrap">
+    <tr class=".text-nowrap class">
+        <th>EmployeeId</th>
+        <th>First Name</th>
+        <th>Middle Name</th>
+        <th>Last Name</th>
+        <th>Birth Month</th>
+        <th>Birth Day</th>
+        <th>Birth Year</th>
+        <th>Age</th>
+        <th>Phone Number</th>
+        <th>Email Address</th>
+        <th>Home Address</th>
+        <th>Pay Rate</th>
+        <th>Employee Department</th>
+        <th>Hours Worked</th>
+    </tr>
+    <tr>
+        <td>@Model.FirstName</td>
+        <td>@Model.MiddleName</td>
+        <td>@Model.LastName</td>
+        <td>@Model.BirthMonth</td>
+        <td>@Model.BirthDay</td>
+        <td>@Model.BirthYear</td>
+        <td>@Model.Age</td>
+        <td>@Model.PhoneNumber</td>
+        <td>@Model.EmailAddress</td>
+        <td>@Model.HomeAddress</td>
+        <td>@Model.PayRate</td>
+        <td>@Model.EmployeeDepartment</td>
+        <td>@Model.HoursWorked</td>
+    </tr>
+</table>
+<div style="display: block">
+    <a href="/Employee/UpdateEmployee/@Model.EmployeeId">Update this Employee</a>
+</div>
+
+<div style="display: block">
+
+    @using (Html.BeginForm("DeleteEmployee", "Employee", "Post"))
+    {
+        <input type="hidden" asp-for="EmployeeId" value="@Model.EmployeeId" />
+        <input type="submit" onclick="return confirm('Are you sure?')" value="Delete this Employee" />
+    }
+</div>
