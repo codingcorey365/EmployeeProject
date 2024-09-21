@@ -71,6 +71,9 @@ namespace EmployeeProject.Controllers
                         e.PayRate.ToString().Contains(searchString) ||
                         e.HoursWorked.ToString().Contains(searchString))
                     .ToList();
+                
+              
+
             }
 
             return View(employees);
