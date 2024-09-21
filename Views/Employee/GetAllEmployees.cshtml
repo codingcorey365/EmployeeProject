@@ -1,5 +1,57 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<Employee>
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Employee/GetAllEmployees.css" asp-append-version="true" />
+</head>
+
+<h2>Employee</h2>
+
+<!-- Displays the button to view a single employee -->
+<div style="display: block">
+    <a href="/Employee/ViewSingleEmployee/">View Employee</a>
+</div>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Birth Month</th>
+                <th>Birth Day</th>
+                <th>Birth Year</th>
+                <th>Age</th>
+                <th>Phone Number</th>
+                <th>Email Address</th>
+                <th>Home Address</th>
+                <th>Pay Rate</th>
+                <th>Employee Department</th>
+                <th>Hours Worked</th>
+            </tr>
+        </thead>
+
+        @foreach (var employeesInList in Model)
+        {
+            <tr>
+                <td>
+                    <a href="/Employee/ViewSingleEmployee/@employeesInList.EmployeeId">@employeesInList.EmployeeId</a>
+                </td>
+                <td class="border-end">@employeesInList.FirstName</td>
+                <td class="border-end">@employeesInList.MiddleName</td>
+                <td class="border-end">@employeesInList.LastName</td>
+                <td class="border-end">@employeesInList.BirthMonth</td>
+                <td class="border-end">@employeesInList.BirthDay</td>
+                <td class="border-end">@employeesInList.BirthYear</td>
+                <td class="border-end">@employeesInList.Age</td>
+                <td class="border-end">@employeesInList.PhoneNumber</td>
+                <td class="border-end">@employeesInList.EmailAddress</td>
+                <td class="border-end">@employeesInList.HomeAddress</td>
+                <td class="border-end">@employeesInList.PayRate</td>
+                <td class="border-end">@employeesInList.EmployeeDepartment</td>
+                <td class="border-end">@employeesInList.HoursWorked</td>
+            </tr>
+        }
+    </table>
+</div>
