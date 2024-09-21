@@ -51,8 +51,40 @@ public class EmployeeRepository : IEmployeeRepository
     /*------------*/
     public void UpdateEmployee(Employee employee)
     {
-        _connection.Execute("Update employees set FirstName = @FirstName where EmployeeId = @EmployeeId",
-            new { FirstName = employee.FirstName, EmployeeId = employee.EmployeeId });
+        _connection.Execute(@"UPDATE employees 
+                      SET FirstName = @FirstName, 
+                          MiddleName = @MiddleName, 
+                          LastName = @LastName, 
+                          BirthDay = @BirthDay, 
+                          BirthMonth = @BirthMonth, 
+                          BirthYear = @BirthYear, 
+                          Age = @Age, 
+                          PhoneNumber = @PhoneNumber, 
+                          EmailAddress = @EmailAddress, 
+                          HomeAddress = @HomeAddress, 
+                          EmployeeDepartment = @EmployeeDepartment, 
+                          EmployeeTitle = @EmployeeTitle, 
+                          PayRate = @PayRate, 
+                          HoursWorked = @HoursWorked 
+                      WHERE EmployeeId = @EmployeeId",
+            new
+            {
+                employee.FirstName,
+                employee.MiddleName,
+                employee.LastName,
+                employee.BirthDay,
+                employee.BirthMonth,
+                employee.BirthYear,
+                employee.Age,
+                employee.PhoneNumber,
+                employee.EmailAddress,
+                employee.HomeAddress,
+                employee.EmployeeDepartment,
+                employee.EmployeeTitle,
+                employee.PayRate,
+                employee.HoursWorked,
+                employee.EmployeeId
+            });
     }
 
     public void UpdateEmployeeName(int employeeId, string updatedName)
