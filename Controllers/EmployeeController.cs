@@ -1,5 +1,7 @@
 ﻿using EmployeeProject.Interface;
 using EmployeeProject.Models;
+using EmployeeProject.Repository;
+using EmployeeProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeProject.Controllers
@@ -16,11 +18,11 @@ namespace EmployeeProject.Controllers
         }
 
         // Index
-        public IActionResult Index()
-        {
+        //public IActionResult Index()
+        //{
 
-            return View();
-        }
+        //    return View();
+        //}
 
         /*--- CRUD OPERATIONS ---* /
 
@@ -95,6 +97,26 @@ namespace EmployeeProject.Controllers
             return View(employees);
         }
 
+        public IActionResult ViewSingleEmployeeById(int id)
+        {
+            // Example: Fetch the list of employees from a repository or database
+            var employees = _repo.GetAllEmployees();
+
+            // Example: Fetch a single employee (e.g., by ID or other criteria)
+            var employee = _repo.GetEmployeeById(id);
+
+            // Create the ViewModel
+            var viewModel = new EmployeeViewModel
+            {
+                Employees = employees,
+                Employee = employee
+            };
+
+            // Pass the ViewModel to the view
+            return View(viewModel);
+        }
+
+
         //public IActionResult GetAllEmployees()
         //{
         //    var employees = _repo.GetAllEmployees();
@@ -107,6 +129,12 @@ namespace EmployeeProject.Controllers
             var employee = _repo.GetEmployeeById(id);
             return View(employee);
         }
+
+        //public IActionResult ViewSingleEmployee(int id)
+        //{
+        //    var employee = _repo.GetEmployeeById(id);
+        //    return View(employee);
+        //}
 
         /*--- UPDATE ---*/
         /*-------------*/

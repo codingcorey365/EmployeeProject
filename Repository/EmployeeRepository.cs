@@ -2,6 +2,7 @@
 using EmployeeProject.Interface;
 using EmployeeProject.Models;
 using System.Data;
+using EmployeeProject.ViewModels;
 
 namespace EmployeeProject.Repository;
 
@@ -42,9 +43,14 @@ public class EmployeeRepository : IEmployeeRepository
     public Employee GetEmployeeById(int id)
     {
 
-        return _connection.QuerySingle<Employee>("SELECT * FROM employees where EmployeeId = @id", new { id = id });
+        return _connection.QuerySingleOrDefault<Employee>("SELECT * FROM employees where EmployeeId = @id", new { id = id });
     }
 
+    public Employee GetEmployeeViewModelById(int id)
+    {
+
+        return _connection.QuerySingleOrDefault<Employee>("SELECT * FROM employees where EmployeeId = @id", new { id = id });
+    }
 
     /*--- UPDATE ---*/
     /*-------------*/

@@ -1,6 +1,7 @@
 ﻿@using Org.BouncyCastle.Asn1.Ocsp
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model IEnumerable<Employee>
+@model EmployeeProject.ViewModels.EmployeeViewModel
+
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/Employee/GetAllEmployees.css" asp-append-version="true" />
@@ -21,7 +22,18 @@
     </div>
 </form>
 
+@*Search By ID*@
+<form asp-controller="Employee" asp-action="ViewSingleEmployeeById" method="get">
+    <div class="input-group mb-3">
+        <input type="number" name="id" class="form-control" placeholder="Search employees By Id..." />
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
 
+
+<div style="display: block">
+    <a href="/Employee/ViewSingleEmployee/">View Employee</a>
+</div>
 
 @if (!string.IsNullOrEmpty(ViewContext.HttpContext.Request.Query["searchString"]))
 {
@@ -52,7 +64,7 @@
             </tr>
         </thead>
 
-        @foreach (var employeesInList in Model)
+        @foreach (var employeesInList in Model.Employees)
         {
             <tr>
                 <td>
@@ -69,7 +81,7 @@
                 <td class="border-end text-start ps-2">@employeesInList.EmailAddress</td>
                 <td class="border-end text-start ps-2">@employeesInList.HomeAddress</td>
                 <td class="border-end">@employeesInList.PayRate</td>
-                <td class="border-end text-start ps-2ss">@employeesInList.EmployeeDepartment</td>
+                <td class="border-end text-start ps-2">@employeesInList.EmployeeDepartment</td>
                 <td class="border-end">@employeesInList.HoursWorked</td>
             </tr>
         }
