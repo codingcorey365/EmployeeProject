@@ -73,21 +73,23 @@ namespace EmployeeProject.Controllers
                         e.PayRate.ToString().Contains(searchString) ||
                         e.HoursWorked.ToString().Contains(searchString))
                     .ToList();
-                
-              
-
             }
+            var mike = new EmployeeViewModel
+            {
+                Employees = employees,
+                Employee = new Employee()
+            };
 
-            return View(employees);
+            return View(mike);
         }
 
         public IActionResult ViewSingleEmployeeById(int id)
         {
             // Example: Fetch the list of employees from a repository or database
-            var employees = _repo.GetAllEmployees();
+            var employees = _repo.GetAllEmployees().ToList();
 
             // Example: Fetch a single employee (e.g., by ID or other criteria)
-            var employee = _repo.GetEmployeeById(id);
+            var employee = employees.FirstOrDefault(x => x.EmployeeId == id);
 
             // Create the ViewModel
             var viewModel = new EmployeeViewModel

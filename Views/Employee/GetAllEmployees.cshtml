@@ -2,6 +2,8 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model EmployeeProject.ViewModels.EmployeeViewModel
 
+
+
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/Employee/GetAllEmployees.css" asp-append-version="true" />
@@ -9,10 +11,11 @@
 
 <h2>Employee</h2>
 
-<!-- Displays the button to view a single employee -->
+
+ <!-- Displays the button to view a single employee -->
 <div style="display: block">
     <a href="/Employee/ViewSingleEmployee/">View Employee</a>
-</div>
+</div> 
 
 <!-- Search Bar -->
 <form asp-controller="Employee" asp-action="GetAllEmployees" method="get">

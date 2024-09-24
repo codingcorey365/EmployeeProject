@@ -4,7 +4,12 @@ namespace EmployeeProject.ViewModels;
 
 public class EmployeeViewModel
 {
-    public IEnumerable<Employee>? Employees { get; set; }
+
+    public EmployeeViewModel()
+    {
+        Employees = new List<Employee>();
+    }
+    public IEnumerable<Employee> Employees { get; set; }
     public Employee? Employee { get; set; }
 
     //EmployeeID
