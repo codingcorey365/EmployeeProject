@@ -2,7 +2,6 @@
 using EmployeeProject.Interface;
 using EmployeeProject.Models;
 using System.Data;
-using EmployeeProject.ViewModels;
 
 namespace EmployeeProject.Repository;
 

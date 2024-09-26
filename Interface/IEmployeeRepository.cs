@@ -1,6 +1,4 @@
 ﻿using EmployeeProject.Models;
-using EmployeeProject.ViewModels;
-using System.Data.Common;
 
 namespace EmployeeProject.Interface;
 

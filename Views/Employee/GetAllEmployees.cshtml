@@ -1,7 +1,6 @@
 ﻿@using Org.BouncyCastle.Asn1.Ocsp
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model EmployeeProject.ViewModels.EmployeeViewModel
-
+@model IEnumerable<Employee>
 
 
 <head>
@@ -25,13 +24,13 @@
     </div>
 </form>
 
-@*Search By ID*@
+@*$1$Search By ID#1#
 <form asp-controller="Employee" asp-action="ViewSingleEmployeeById" method="get">
     <div class="input-group mb-3">
         <input type="number" name="id" class="form-control" placeholder="Search employees By Id..." />
         <button class="btn btn-primary" type="submit">Search</button>
     </div>
-</form>
+</form>*@
 
 
 <div style="display: block">
@@ -67,7 +66,7 @@
             </tr>
         </thead>
 
-        @foreach (var employeesInList in Model.Employees)
+        @foreach (var employeesInList in Model)
         {
             <tr>
                 <td>

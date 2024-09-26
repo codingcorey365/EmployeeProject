@@ -1,7 +1,5 @@
 ﻿using EmployeeProject.Interface;
 using EmployeeProject.Models;
-using EmployeeProject.Repository;
-using EmployeeProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeProject.Controllers
@@ -50,7 +48,7 @@ namespace EmployeeProject.Controllers
 
         // Get All Employees
 
-        public IActionResult GetAllEmployees(string searchString)
+        /*public IActionResult GetAllEmployees(string searchString)
         {
             var employees = _repo.GetAllEmployees();
 
@@ -58,30 +56,87 @@ namespace EmployeeProject.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 employees = employees.Where(e =>
-                        e.FirstName.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                        e.MiddleName.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                        e.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                        e.BirthDay.ToString().Contains(searchString) ||
-                        e.BirthMonth.ToString().Contains(searchString) ||
-                        e.BirthYear.ToString().Contains(searchString) ||
-                        e.Age.ToString().Contains(searchString) ||
-                        e.PhoneNumber.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                        e.EmailAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                        e.HomeAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                        e.EmployeeDepartment.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                        e.EmployeeTitle.ToString().Contains(searchString) ||
-                        e.PayRate.ToString().Contains(searchString) ||
-                        e.HoursWorked.ToString().Contains(searchString))
+                    // Name
+                    (!string.IsNullOrEmpty(e.FirstName) && e.FirstName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                    (!string.IsNullOrEmpty(e.MiddleName) && e.MiddleName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                    (!string.IsNullOrEmpty(e.LastName) && e.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                    //Birthday
+                    e.BirthDay.ToString().Contains(searchString) ||
+                    e.BirthMonth.ToString().Contains(searchString) ||
+                    e.BirthYear.ToString().Contains(searchString) ||
+                    e.Age.ToString().Contains(searchString) ||
+                    //Contact
+                    (!string.IsNullOrEmpty(e.PhoneNumber) && e.PhoneNumber.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                    (!string.IsNullOrEmpty(e.EmailAddress) && e.EmailAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                    (!string.IsNullOrEmpty(e.HomeAddress) && e.HomeAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                    //Employee Info
+                    (!string.IsNullOrEmpty(e.EmployeeDepartment) && e.EmployeeDepartment.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                    e.EmployeeTitle.ToString().Contains(searchString) ||
+                    e.PayRate.ToString().Contains(searchString) ||
+                    e.HoursWorked.ToString().Contains(searchString)
+                    ).ToList();
+
+            }
+           
+
+            return View(employees);
+        }*/
+
+        public IActionResult GetAllEmployees(string searchString)
+        {
+            var employees = _repo.GetAllEmployees();
+
+            // If a search string is provided, filter employees
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                employees = employees
+                    .Where(e => IsMatch(e, searchString))
                     .ToList();
             }
-            var mike = new EmployeeViewModel
-            {
-                Employees = employees,
-                Employee = new Employee()
-            };
 
-            return View(mike);
+            return View(employees);
         }
+
+        private bool IsMatch(Employee e, string searchString)
+        {
+            var search = searchString.Trim().ToLower();
+
+            return MatchesName(e, search) ||
+                   MatchesBirthday(e, search) ||
+                   MatchesContactInfo(e, search) ||
+                   MatchesEmployeeInfo(e, search);
+        }
+
+        private bool MatchesName(Employee e, string searchString)
+        {
+            return (!string.IsNullOrEmpty(e.FirstName) && e.FirstName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                   (!string.IsNullOrEmpty(e.MiddleName) && e.MiddleName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                   (!string.IsNullOrEmpty(e.LastName) && e.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private bool MatchesBirthday(Employee e, string searchString)
+        {
+            return e.BirthDay.ToString().Contains(searchString) ||
+                   e.BirthMonth.ToString().Contains(searchString) ||
+                   e.BirthYear.ToString().Contains(searchString) ||
+                   e.Age.ToString().Contains(searchString);
+        }
+
+        private bool MatchesContactInfo(Employee e, string searchString)
+        {
+            return (!string.IsNullOrEmpty(e.PhoneNumber) && e.PhoneNumber.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                   (!string.IsNullOrEmpty(e.EmailAddress) && e.EmailAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                   (!string.IsNullOrEmpty(e.HomeAddress) && e.HomeAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private bool MatchesEmployeeInfo(Employee e, string searchString)
+        {
+            return (!string.IsNullOrEmpty(e.EmployeeDepartment) && e.EmployeeDepartment.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
+                   e.EmployeeTitle.ToString().Contains(searchString) ||
+                   e.PayRate.ToString().Contains(searchString) ||
+                   e.HoursWorked.ToString().Contains(searchString);
+        }
+
 
         public IActionResult ViewSingleEmployeeById(int id)
         {
@@ -91,15 +146,10 @@ namespace EmployeeProject.Controllers
             // Example: Fetch a single employee (e.g., by ID or other criteria)
             var employee = employees.FirstOrDefault(x => x.EmployeeId == id);
 
-            // Create the ViewModel
-            var viewModel = new EmployeeViewModel
-            {
-                Employees = employees,
-                Employee = employee
-            };
+
 
             // Pass the ViewModel to the view
-            return View(viewModel);
+            return View();
         }
 
 
@@ -109,22 +159,22 @@ namespace EmployeeProject.Controllers
         //    return View(employees);
         //}
 
-        // View A Single Employee
+         /*View A Single Employee*/
         public IActionResult ViewSingleEmployee(int id)
         {
             var employee = _repo.GetEmployeeById(id);
             return View(employee);
         }
 
-        //public IActionResult ViewSingleEmployee(int id)
-        //{
-        //    var employee = _repo.GetEmployeeById(id);
-        //    return View(employee);
-        //}
+        /*public IActionResult ViewSingleEmployee(int id)
+        {
+            var employee = _repo.GetEmployeeById(id);
+            return View(employee);
+        }*/
 
-        /*--- UPDATE ---*/
-        /*-------------*/
-        /*------------*/
+        /*--- UPDATE ---
+                /*-------------*/
+                /*------------*/
 
         public IActionResult UpdateEmployee(int id)
         {
