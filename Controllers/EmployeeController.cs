@@ -48,43 +48,14 @@ namespace EmployeeProject.Controllers
 
         // Get All Employees
 
-        /*public IActionResult GetAllEmployees(string searchString)
+       
+
+        public IActionResult GetAllEmployees(string searchString, string sortOrder)
         {
+            ViewBag.IdSortParm = sortOrder == "id_asc" ? "id_desc" : "id_asc";
+            
             var employees = _repo.GetAllEmployees();
 
-            // Apply search filter if searchString is provided
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                employees = employees.Where(e =>
-                    // Name
-                    (!string.IsNullOrEmpty(e.FirstName) && e.FirstName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
-                    (!string.IsNullOrEmpty(e.MiddleName) && e.MiddleName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
-                    (!string.IsNullOrEmpty(e.LastName) && e.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
-                    //Birthday
-                    e.BirthDay.ToString().Contains(searchString) ||
-                    e.BirthMonth.ToString().Contains(searchString) ||
-                    e.BirthYear.ToString().Contains(searchString) ||
-                    e.Age.ToString().Contains(searchString) ||
-                    //Contact
-                    (!string.IsNullOrEmpty(e.PhoneNumber) && e.PhoneNumber.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
-                    (!string.IsNullOrEmpty(e.EmailAddress) && e.EmailAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
-                    (!string.IsNullOrEmpty(e.HomeAddress) && e.HomeAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
-                    //Employee Info
-                    (!string.IsNullOrEmpty(e.EmployeeDepartment) && e.EmployeeDepartment.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
-                    e.EmployeeTitle.ToString().Contains(searchString) ||
-                    e.PayRate.ToString().Contains(searchString) ||
-                    e.HoursWorked.ToString().Contains(searchString)
-                    ).ToList();
-
-            }
-           
-
-            return View(employees);
-        }*/
-
-        public IActionResult GetAllEmployees(string searchString)
-        {
-            var employees = _repo.GetAllEmployees();
 
             // If a search string is provided, filter employees
             if (!string.IsNullOrEmpty(searchString))
@@ -93,6 +64,19 @@ namespace EmployeeProject.Controllers
                     .Where(e => IsMatch(e, searchString))
                     .ToList();
             }
+
+            // Sort by column
+            employees = sortOrder switch
+            {
+                "name_asc" => employees.OrderBy(e => e.FirstName).ToList(),
+                "name_desc" => employees.OrderByDescending(e => e.FirstName).ToList(),
+                "id_asc" => employees.OrderBy(e => e.EmployeeId).ToList(),
+                "id_desc" => employees.OrderByDescending(e => e.EmployeeId).ToList(),
+                "age_asc" => employees.OrderBy(e => e.Age).ToList(),
+                "age_desc" => employees.OrderByDescending(e => e.Age).ToList(),
+                _ => employees.OrderBy(e => e.FirstName).ToList(), // Default sorting
+            };
+
 
             return View(employees);
         }

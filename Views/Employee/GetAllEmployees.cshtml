@@ -1,4 +1,4 @@
-﻿@using Org.BouncyCastle.Asn1.Ocsp
+﻿
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model IEnumerable<Employee>
 
@@ -12,9 +12,9 @@
 
 
  <!-- Displays the button to view a single employee -->
-<div style="display: block">
+@*<div style="display: block">
     <a href="/Employee/ViewSingleEmployee/">View Employee</a>
-</div> 
+</div> *@
 
 <!-- Search Bar -->
 <form asp-controller="Employee" asp-action="GetAllEmployees" method="get">
@@ -33,59 +33,72 @@
 </form>*@
 
 
-<div style="display: block">
+@*<div style="display: block">
     <a href="/Employee/ViewSingleEmployee/">View Employee</a>
-</div>
+</div>*@
 
 @if (!string.IsNullOrEmpty(ViewContext.HttpContext.Request.Query["searchString"]))
 {
-    <div>
+    <div class="mt-4">
         <a asp-action="GetAllEmployees" class="btn btn-secondary">Back to Full List</a>
     </div>
 }
 
 
-<div id="wrapper">
-    <table class="table-responsive-sm text-nowrap">
-        <thead class="sticky-top">
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
-                <th>Birth Month</th>
-                <th>Birth Day</th>
-                <th>Birth Year</th>
-                <th>Age</th>
-                <th>Phone Number</th>
-                <th>Email Address</th>
-                <th>Home Address</th>
-                <th>Pay Rate</th>
-                <th>Department</th>
-                <th>Hours Worked</th>
-            </tr>
-        </thead>
+@if (!Model.Any())
+{
+    <p class="text-center text-bg-danger mt-5 p-4 ">No employees found.</p>
+}
+else
+    
+{
+    <div id="wrapper">
+        <table class="table-responsive-sm text-nowrap">
+            <thead class="sticky-top">
+                <tr>
+                    @*<th class=" px-2">ID</th>*@
+                    <th class="px-2">
+                    <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.IdSortParm">
+                        ID
+                    </a>
+                    <th class=" px-2">First Name</th>
+                    <th class=" px-2">Middle Name</th>
+                    <th class=" px-2">Last Name</th>
+                    <th class=" px-2">Birth Month</th>
+                    <th class=" px-2">Birth Day</th>
+                    <th class=" px-2">Birth Year</th>
+                    <th class=" px-2">Age</th>
+                    <th class=" px-2">Phone Number</th>
+                    <th class=" px-2">Email Address</th>
+                    <th class=" px-2">Home Address</th>
+                    <th class=" px-2">Pay Rate</th>
+                    <th class=" px-2">Department</th>
+                    <th class=" px-2">Hours Worked</th>
+                </tr>
+            </thead>
 
-        @foreach (var employeesInList in Model)
-        {
-            <tr>
-                <td>
-                    <a href="/Employee/ViewSingleEmployee/@employeesInList.EmployeeId">@employeesInList.EmployeeId</a>
-                </td>
-                <td class="border-end text-start ps-2">@employeesInList.FirstName</td>
-                <td class="border-end text-start ps-2">@employeesInList.MiddleName</td>
-                <td class="border-end text-start ps-2">@employeesInList.LastName</td>
-                <td class="border-end">@employeesInList.BirthMonth</td>
-                <td class="border-end">@employeesInList.BirthDay</td>
-                <td class="border-end">@employeesInList.BirthYear</td>
-                <td class="border-end">@employeesInList.Age</td>
-                <td class="border-end">@employeesInList.PhoneNumber</td>
-                <td class="border-end text-start ps-2">@employeesInList.EmailAddress</td>
-                <td class="border-end text-start ps-2">@employeesInList.HomeAddress</td>
-                <td class="border-end">@employeesInList.PayRate</td>
-                <td class="border-end text-start ps-2">@employeesInList.EmployeeDepartment</td>
-                <td class="border-end">@employeesInList.HoursWorked</td>
-            </tr>
-        }
-    </table>
-</div>
+            @foreach (var employeesInList in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="/Employee/ViewSingleEmployee/@employeesInList.EmployeeId">@employeesInList.EmployeeId</a>
+                    </td>
+                    <td class="border-end text-start px-2">@employeesInList.FirstName</td>
+                    <td class="border-end text-start px-2">@employeesInList.MiddleName</td>
+                    <td class="border-end text-start px-2">@employeesInList.LastName</td>
+                    <td class="border-end px-2">@employeesInList.BirthMonth</td>
+                    <td class="border-end px-2">@employeesInList.BirthDay</td>
+                    <td class="border-end px-2">@employeesInList.BirthYear</td>
+                    <td class="border-end px-2">@employeesInList.Age</td>
+                    <td class="border-end px-2">@employeesInList.PhoneNumber</td>
+                    <td class="border-end text-start px-2">@employeesInList.EmailAddress</td>
+                    <td class="border-end text-start px-2">@employeesInList.HomeAddress</td>
+                    <td class="border-end px-2">@employeesInList.PayRate</td>
+                    <td class="border-end text-start px-2">@employeesInList.EmployeeDepartment</td>
+                    <td class="border-end px-2">@employeesInList.HoursWorked</td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+

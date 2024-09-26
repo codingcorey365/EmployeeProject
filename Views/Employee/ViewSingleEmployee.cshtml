@@ -1,6 +1,11 @@
 ﻿@using Org.BouncyCastle.Crypto.Engines
 @model Employee
 
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Employee/GetAllEmployees.css" asp-append-version="true" />
+</head>
+
 <h3>Employee Information</h3>
 
 
@@ -38,6 +43,50 @@
         <td>@Model.HoursWorked</td>
     </tr>
 </table>
+
+<div>
+    <table class="table-responsive-sm text-nowrap">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th class=" px-2">First Name</th>
+                <th class=" px-2">Middle Name</th>
+                <th class=" px-2">Last Name</th>
+                <th class=" px-2">Birth Month</th>
+                <th class=" px-2">Birth Day</th>
+                <th class=" px-2">Birth Year</th>
+                <th class=" px-2">Age</th>
+                <th class=" px-2">Phone Number</th>
+                <th class=" px-2">Email Address</th>
+                <th class=" px-2">Home Address</th>
+                <th class=" px-2">Pay Rate</th>
+                <th class=" px-2">Department</th>
+                <th class=" px-2">Hours Worked</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="border-end px-4">@Model.EmployeeId</td>
+                <td class="border-end px-4">@Model.FirstName</td>
+                <td class="border-end px-4">@Model.MiddleName</td>
+                <td class="border-end px-4">@Model.LastName</td>
+                <td class="border-end px-4">@Model.BirthMonth</td>
+                <td class="border-end px-4">@Model.BirthDay</td>
+                <td class="border-end px-4">@Model.BirthYear</td>
+                <td class="border-end px-4">@Model.Age</td>
+                <td class="border-end px-4">@Model.PhoneNumber</td>
+                <td class="border-end px-4">@Model.EmailAddress</td>
+                <td class="border-end  px-4">@Model.HomeAddress</td>
+                <td class="border-end px-4">@Model.PayRate</td>
+                <td class="border-end px-4">@Model.EmployeeDepartment</td>
+                <td class="border-end px-4">@Model.HoursWorked</td>
+            </tr>
+                
+        </tbody>
+
+    </table>
+</div>
+
 <div style="display: block">
     <a href="/Employee/UpdateEmployee/@Model.EmployeeId">Update this Employee</a>
 </div>
