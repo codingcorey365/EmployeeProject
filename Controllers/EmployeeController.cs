@@ -52,8 +52,22 @@ namespace EmployeeProject.Controllers
 
         public IActionResult GetAllEmployees(string searchString, string sortOrder)
         {
-            ViewBag.IdSortParm = sortOrder == "id_asc" ? "id_desc" : "id_asc";
-            
+            ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) || sortOrder == "id_asc" ? "id_desc" : "id_asc";
+            ViewBag.FirstNameSortParm = sortOrder == "firstName_asc" ? "firstName_desc" : "firstName_asc";
+            ViewBag.MiddleNameSortParm = sortOrder == "middleName_asc" ? "middleName_desc" : "middleName_asc";
+            ViewBag.LastNameSortParm = sortOrder == "lastName_asc" ? "lastName_desc" : "lastName_asc";
+            ViewBag.BirthMonthSortParm = sortOrder == "birthMonth_asc" ? "birthMonth_desc" : "birthMonth_asc";
+            ViewBag.BirthDaySortParm = sortOrder == "birthDay_asc" ? "birthDay_desc" : "birthDay_asc";
+            ViewBag.BirthYearSortParm = sortOrder == "birthYear_asc" ? "birthYear_desc" : "birthYear_asc";
+            ViewBag.AgeSortParm = sortOrder == "age_asc" ? "age_desc" : "age_asc";
+            ViewBag.PhoneNumberSortParm = sortOrder == "phoneNumber_asc" ? "phoneNumber_desc" : "phoneNumber_asc";
+            ViewBag.EmailAddressSortParm = sortOrder == "emailAddress_asc" ? "emailAddress_desc" : "emailAddress_asc";
+            ViewBag.HomeAddressSortParm = sortOrder == "homeAddress_asc" ? "homeAddress_desc" : "homeAddress_asc";
+            ViewBag.PayRateSortParm = sortOrder == "payRate_asc" ? "payRate_desc" : "payRate_asc";
+            ViewBag.DepartmentSortParm = sortOrder == "department_asc" ? "department_desc" : "department_asc";
+            ViewBag.HoursWorkedSortParm = sortOrder == "hoursWorked_asc" ? "hoursWorked_desc" : "hoursWorked_asc";
+
+
             var employees = _repo.GetAllEmployees();
 
 
@@ -68,13 +82,35 @@ namespace EmployeeProject.Controllers
             // Sort by column
             employees = sortOrder switch
             {
-                "name_asc" => employees.OrderBy(e => e.FirstName).ToList(),
-                "name_desc" => employees.OrderByDescending(e => e.FirstName).ToList(),
-                "id_asc" => employees.OrderBy(e => e.EmployeeId).ToList(),
                 "id_desc" => employees.OrderByDescending(e => e.EmployeeId).ToList(),
-                "age_asc" => employees.OrderBy(e => e.Age).ToList(),
+                "id_asc" => employees.OrderBy(e => e.EmployeeId).ToList(),
+                "firstName_desc" => employees.OrderByDescending(e => e.FirstName).ToList(),
+                "firstName_asc" => employees.OrderBy(e => e.FirstName).ToList(), 
+                "middleName_asc" => employees.OrderByDescending(e => e.MiddleName).ToList(),
+                "middleName_desc" => employees.OrderBy(e => e.MiddleName).ToList(),
+                "lastName_desc" => employees.OrderByDescending(e => e.LastName).ToList(),
+                "lastName_asc" => employees.OrderBy(e => e.LastName).ToList(),
+                "birthMonth_desc" => employees.OrderByDescending(e => e.BirthMonth).ToList(),
+                "birthMonth_asc" => employees.OrderBy(e => e.BirthMonth).ToList(),
+                "birthDay_desc" => employees.OrderByDescending(e => e.BirthDay).ToList(),
+                "birthDay_asc" => employees.OrderBy(e => e.BirthDay).ToList(),
+                "birthYear_desc" => employees.OrderByDescending(e => e.BirthYear).ToList(),
+                "birthYear_asc" => employees.OrderBy(e => e.BirthYear).ToList(),
                 "age_desc" => employees.OrderByDescending(e => e.Age).ToList(),
-                _ => employees.OrderBy(e => e.FirstName).ToList(), // Default sorting
+                "age_asc" => employees.OrderBy(e => e.Age).ToList(),
+                "phoneNumber_desc" => employees.OrderByDescending(e => e.PhoneNumber).ToList(),
+                "phoneNumber_asc" => employees.OrderBy(e => e.PhoneNumber).ToList(),
+                "emailAddress_desc" => employees.OrderByDescending(e => e.EmailAddress).ToList(),
+                "emailAddress_asc" => employees.OrderBy(e => e.EmailAddress).ToList(),
+                "homeAddress_desc" => employees.OrderByDescending(e => e.HomeAddress).ToList(),
+                "homeAddress_asc" => employees.OrderBy(e => e.HomeAddress).ToList(),
+                "payRate_desc" => employees.OrderByDescending(e => e.PayRate).ToList(),
+                "payRate_asc" => employees.OrderBy(e => e.PayRate).ToList(),
+                "department_desc" => employees.OrderByDescending(e => e.EmployeeDepartment).ToList(),
+                "department_asc" => employees.OrderBy(e => e.EmployeeDepartment).ToList(),
+                "hoursWorked_desc" => employees.OrderByDescending(e => e.HoursWorked).ToList(),
+                "hoursWorked_asc" => employees.OrderBy(e => e.HoursWorked).ToList(),
+                _ => employees.OrderBy(e => e.EmployeeId).ToList() // Default sorting
             };
 
 

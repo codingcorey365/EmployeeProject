@@ -6,46 +6,12 @@
     <link rel="stylesheet" href="~/css/Employee/GetAllEmployees.css" asp-append-version="true" />
 </head>
 
-<h3>Employee Information</h3>
+<h3 class="mt-5 mb-3">Employee Information</h3>
 
 
-<table class="table table-bordered text-center text-nowrap">
-    <tr class=".text-nowrap class">
-        <th>EmployeeId</th>
-        <th>First Name</th>
-        <th>Middle Name</th>
-        <th>Last Name</th>
-        <th>Birth Month</th>
-        <th>Birth Day</th>
-        <th>Birth Year</th>
-        <th>Age</th>
-        <th>Phone Number</th>
-        <th>Email Address</th>
-        <th>Home Address</th>
-        <th>Pay Rate</th>
-        <th>Employee Department</th>
-        <th>Hours Worked</th>
-    </tr>
-    <tr>
-        <td>@Model.EmployeeId</td>
-        <td class="border-end text-start ps-2">@Model.FirstName</td>
-        <td class="border-end text-start ps-2">@Model.MiddleName</td>
-        <td class="border-end text-start ps-2">@Model.LastName</td>
-        <td>@Model.BirthMonth</td>
-        <td>@Model.BirthDay</td>
-        <td>@Model.BirthYear</td>
-        <td>@Model.Age</td>
-        <td>@Model.PhoneNumber</td>
-        <td class ="text-start ps-2">@Model.EmailAddress</td>
-        <td class="text-start ps-2">@Model.HomeAddress</td>
-        <td>@Model.PayRate</td>
-        <td>@Model.EmployeeDepartment</td>
-        <td>@Model.HoursWorked</td>
-    </tr>
-</table>
 
 <div>
-    <table class="table-responsive-sm text-nowrap">
+    <table class="table-responsive-sm text-nowrap mb-3">
         <thead>
             <tr>
                 <th>ID</th>
@@ -87,9 +53,23 @@
     </table>
 </div>
 
-<div style="display: block">
+@*$1$<div class="mb-3" style="display: block">
     <a href="/Employee/UpdateEmployee/@Model.EmployeeId">Update this Employee</a>
+</div>#1#
+
+
+<div style="display: block">
+    @#1#using (Html.BeginForm("UpdateEmployeeToDatabase", "Employee", "Get"))
+    {
+        <input type="hidden" asp-for="EmployeeId" value="@Model.EmployeeId" />
+        <input type="submit"  value="Update this Employee" />
+    }#1#
+    <div class="mb-3" style="display: block">
+        <a href="/Employee/UpdateEmployee/@Model.EmployeeId">Update this Employee</a>
+    </div>
 </div>
+
+$1$Good Delete Below#1#
 
 <div style="display: block">
 
@@ -98,4 +78,17 @@
         <input type="hidden" asp-for="EmployeeId" value="@Model.EmployeeId" />
         <input type="submit" onclick="return confirm('Are you sure?')" value="Delete this Employee" />
     }
+</div>*@
+
+<div style="display: block">
+    <div class="mb-3" style="display: block">
+        <a href="/Employee/UpdateEmployee/@Model.EmployeeId" class="btn btn-dark" style="background-color:steelblue">Update this Employee</a>
+    </div>
+</div>
+
+<div  style="display: block">
+    <form asp-action="DeleteEmployee" asp-controller="Employee" method="post" style="display:inline;">
+        <input type="hidden" asp-for="EmployeeId" value="@Model.EmployeeId" />
+        <input type="submit" value="Delete this Employee" class="btn btn-dark" style="background-color:crimson" />
+    </form>
 </div>

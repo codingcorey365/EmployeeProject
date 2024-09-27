@@ -56,26 +56,90 @@ else
         <table class="table-responsive-sm text-nowrap">
             <thead class="sticky-top">
                 <tr>
-                    @*<th class=" px-2">ID</th>*@
                     <th class="px-2">
-                    <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.IdSortParm">
-                        ID
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.IdSortParm">
+                            ID
+                        </a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.FirstNameSortParm">
+                            First Name
+                        </a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.MiddleNameSortParm">
+                            Middle Name
+                        </a>
+                    </th>
+                    
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.LastNameSortParm">
+                            Last Name
+                        </a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.BirthMonthSortParm">
+                            Birth Month
+                        </a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.BirthDaySortParm">
+                            Birth Day
+                        </a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.BirthYearSortParm">
+                            Birth Year
+                        </a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.AgeSortParm">
+                            Age
+                        </a>
+                    </th>
+                    <th class="px-2">
+                    <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.PhoneNumberSortParm">
+                        Phone Number
                     </a>
-                    <th class=" px-2">First Name</th>
-                    <th class=" px-2">Middle Name</th>
-                    <th class=" px-2">Last Name</th>
-                    <th class=" px-2">Birth Month</th>
-                    <th class=" px-2">Birth Day</th>
-                    <th class=" px-2">Birth Year</th>
-                    <th class=" px-2">Age</th>
-                    <th class=" px-2">Phone Number</th>
-                    <th class=" px-2">Email Address</th>
-                    <th class=" px-2">Home Address</th>
-                    <th class=" px-2">Pay Rate</th>
-                    <th class=" px-2">Department</th>
-                    <th class=" px-2">Hours Worked</th>
+                    </th>
+
+                    
+                    
+                    
+                    
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.EmailAddressSortParm">
+                            Email Address
+                        </a>
+                    </th>
+                    
+                    
+                    
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.HomeAddressSortParm">
+                            Home Address
+                        </a>
+                    </th>
+                    
+                    
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.PayRateSortParm">
+                            Pay Rate
+                        </a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.DepartmentSortParm">
+                            Department
+                        </a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.HoursWorkedSortParm">
+                            Hours Worked
+                        </a>
+                    </th>
                 </tr>
             </thead>
+
 
             @foreach (var employeesInList in Model)
             {
