@@ -15,20 +15,25 @@ namespace EmployeeProject.Controllers
             _repo = repo;
         }
 
-        // Index
-        //public IActionResult Index()
-        //{
+        /*Index*/
+        public IActionResult Index()
+        {
 
-        //    return View();
-        //}
+            return View();
+        }
 
-        /*--- CRUD OPERATIONS ---* /
+        /*--- CRUD OPERATIONS ---*/
+        /*----------------------*/
+        /*---------------------*/
+
+
+
 
         /*--- CREATE ---*/
         /*-------------*/
         /*------------*/
 
-        // View Insert Employee
+        // Go to Insert Employee View
         public IActionResult InsertEmployee()
         {
             return View();
@@ -42,14 +47,14 @@ namespace EmployeeProject.Controllers
             return RedirectToAction("GetAllEmployees");
         }
 
+        
+        
         /*--- READ ---*/
         /*-----------*/
         /*----------*/
 
+        
         // Get All Employees
-
-       
-
         public IActionResult GetAllEmployees(string searchString, string sortOrder)
         {
             ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) || sortOrder == "id_asc" ? "id_desc" : "id_asc";
@@ -157,44 +162,17 @@ namespace EmployeeProject.Controllers
                    e.HoursWorked.ToString().Contains(searchString);
         }
 
-
-        public IActionResult ViewSingleEmployeeById(int id)
-        {
-            // Example: Fetch the list of employees from a repository or database
-            var employees = _repo.GetAllEmployees().ToList();
-
-            // Example: Fetch a single employee (e.g., by ID or other criteria)
-            var employee = employees.FirstOrDefault(x => x.EmployeeId == id);
-
-
-
-            // Pass the ViewModel to the view
-            return View();
-        }
-
-
-        //public IActionResult GetAllEmployees()
-        //{
-        //    var employees = _repo.GetAllEmployees();
-        //    return View(employees);
-        //}
-
-         /*View A Single Employee*/
+        /*View A Single Employee*/
         public IActionResult ViewSingleEmployee(int id)
         {
             var employee = _repo.GetEmployeeById(id);
             return View(employee);
         }
 
-        /*public IActionResult ViewSingleEmployee(int id)
-        {
-            var employee = _repo.GetEmployeeById(id);
-            return View(employee);
-        }*/
-
-        /*--- UPDATE ---
-                /*-------------*/
-                /*------------*/
+        
+        /*--- UPDATE ---*/
+        /*-------------*/
+        /*------------*/
 
         public IActionResult UpdateEmployee(int id)
         {
