@@ -15,31 +15,26 @@ namespace EmployeeProject.Controllers
             _repo = repo;
         }
 
-        /*Index*/
+        // Default Index action, currently returns a view with no data
         public IActionResult Index()
         {
 
             return View();
         }
 
-        /*--- CRUD OPERATIONS ---*/
-        /*----------------------*/
-        /*---------------------*/
+        /* --- CRUD OPERATIONS --- */
+        /* ---------------------- */
 
+        /* --- CREATE --- */
+        /* -------------- */
 
-
-
-        /*--- CREATE ---*/
-        /*-------------*/
-        /*------------*/
-
-        // Go to Insert Employee View
+        // Displays the view to insert a new employee
         public IActionResult InsertEmployee()
         {
             return View();
         }
 
-        // Add Employee to Database
+        // Adds a new employee to the database
         public IActionResult InsertEmployeeToDatabase(Employee employeeToInsert)
         {
             _repo.CreateEmployee(employeeToInsert);
@@ -47,14 +42,10 @@ namespace EmployeeProject.Controllers
             return RedirectToAction("GetAllEmployees");
         }
 
-        
-        
-        /*--- READ ---*/
-        /*-----------*/
-        /*----------*/
+        /* --- READ --- */
+        /* ----------- */
 
-        
-        // Get All Employees
+        // Displays the list of all employees, allowing sorting and searching
         public IActionResult GetAllEmployees(string searchString, string sortOrder)
         {
             ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) || sortOrder == "id_asc" ? "id_desc" : "id_asc";
@@ -72,11 +63,12 @@ namespace EmployeeProject.Controllers
             ViewBag.DepartmentSortParm = sortOrder == "department_asc" ? "department_desc" : "department_asc";
             ViewBag.HoursWorkedSortParm = sortOrder == "hoursWorked_asc" ? "hoursWorked_desc" : "hoursWorked_asc";
 
-
+            
+            // Retrieve all employees from the repository
             var employees = _repo.GetAllEmployees();
 
 
-            // If a search string is provided, filter employees
+            // Filter employees based on search string if provided
             if (!string.IsNullOrEmpty(searchString))
             {
                 employees = employees
@@ -84,7 +76,7 @@ namespace EmployeeProject.Controllers
                     .ToList();
             }
 
-            // Sort by column
+            // Sort employees based on the selected column
             employees = sortOrder switch
             {
                 "id_desc" => employees.OrderByDescending(e => e.EmployeeId).ToList(),
@@ -118,10 +110,11 @@ namespace EmployeeProject.Controllers
                 _ => employees.OrderBy(e => e.EmployeeId).ToList() // Default sorting
             };
 
-
+            // Return the sorted and filtered list of employees to the view
             return View(employees);
         }
-
+        
+        // Checks if the employee matches the search string
         private bool IsMatch(Employee e, string searchString)
         {
             var search = searchString.Trim().ToLower();
@@ -132,6 +125,7 @@ namespace EmployeeProject.Controllers
                    MatchesEmployeeInfo(e, search);
         }
 
+        // Helper method to match names
         private bool MatchesName(Employee e, string searchString)
         {
             return (!string.IsNullOrEmpty(e.FirstName) && e.FirstName.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
@@ -139,6 +133,7 @@ namespace EmployeeProject.Controllers
                    (!string.IsNullOrEmpty(e.LastName) && e.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase));
         }
 
+        // Helper method to match birth details
         private bool MatchesBirthday(Employee e, string searchString)
         {
             return e.BirthDay.ToString().Contains(searchString) ||
@@ -147,6 +142,7 @@ namespace EmployeeProject.Controllers
                    e.Age.ToString().Contains(searchString);
         }
 
+        // Helper method to match contact information
         private bool MatchesContactInfo(Employee e, string searchString)
         {
             return (!string.IsNullOrEmpty(e.PhoneNumber) && e.PhoneNumber.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
@@ -154,6 +150,7 @@ namespace EmployeeProject.Controllers
                    (!string.IsNullOrEmpty(e.HomeAddress) && e.HomeAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase));
         }
 
+        // Helper method to match employee info (department, title, etc.)
         private bool MatchesEmployeeInfo(Employee e, string searchString)
         {
             return (!string.IsNullOrEmpty(e.EmployeeDepartment) && e.EmployeeDepartment.Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
@@ -162,25 +159,24 @@ namespace EmployeeProject.Controllers
                    e.HoursWorked.ToString().Contains(searchString);
         }
 
-        /*View A Single Employee*/
+        // View a single employee by ID
         public IActionResult ViewSingleEmployee(int id)
         {
             var employee = _repo.GetEmployeeById(id);
             return View(employee);
         }
 
-        
-        /*--- UPDATE ---*/
-        /*-------------*/
-        /*------------*/
+        /* --- UPDATE --- */
+        /* ------------- */
 
+        // Displays the update form for an employee
         public IActionResult UpdateEmployee(int id)
         {
             Employee test = _repo.GetEmployeeById(id);
             return View(test);
         }
 
-
+        // Updates the employee record in the database
         public IActionResult UpdateEmployeeToDatabase(Employee employee)
         {
             _repo.UpdateEmployee(employee);
@@ -188,10 +184,10 @@ namespace EmployeeProject.Controllers
             return RedirectToAction("ViewSingleEmployee", new { id = employee.EmployeeId });
         }
 
-        /*--- DELETE ---*/
-        /*-------------*/
-        /*------------*/
+        /* --- DELETE --- */
+        /* ------------- */
 
+        // Deletes an employee record
         public IActionResult DeleteEmployee(Employee employee)
         {
             _repo.DeleteEmployee(employee);
