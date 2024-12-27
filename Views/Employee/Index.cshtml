@@ -1,13 +1,12 @@
-﻿<head>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/Employee/IndexEmployee.css" asp-append-version="true" />
-</head>
-
-<title>Featured Products</title>
+﻿@{
+    // Set the page title and assign the layout for this view
+    ViewData["Title"] = "Employee Page";
+    Layout = "_Layout_Employee_Index";
+}
 
 <body>
-<img src="/images/sunset-3662954.jpg"/>
-<header class="header">
+    <img src="/images/sunset-3662954.jpg" />
+    <header class="header">
         <h1>Project Horizon</h1>
         <p>Our work -- Our future</p>
     </header>
@@ -51,7 +50,6 @@
             <!-- Add more products as needed -->
         </section>
     </div>
-    
+
 
 </body>
-

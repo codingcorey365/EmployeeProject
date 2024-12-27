@@ -1,18 +1,20 @@
 ﻿@{
+    // Set the page title and assign the layout for this view
     ViewData["Title"] = "Home Page";
+    Layout = "_Layout_Home_Index";
 }
-<head>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/Employee/IndexEmployee.css" asp-append-version="true" />
-</head>
 
-<img src="/images/sunset-3662954.jpg" />
+@* Display a background image for the landing page *@
+<img src="/images/sunset-3662954.jpg" alt="Sunset image representing Project Horizon"/>
+
+@* Header section for branding and slogan *@
 <header class="header">
     <h1>Project Horizon</h1>
     <p>Our work -- Our future</p>
 </header>
 
 <div class="container mt-5">
+    @* Main welcome section with centered text *@
     <div class="row text-center">
         <div class="col">
             <h1 class="display-4">Welcome to Project Horizon</h1>
@@ -20,17 +22,23 @@
         </div>
     </div>
 
+    @* Section with mission, vision, and call to join *@
     <div class="row text-center mt-5">
+        @* Mission statement block *@
         <div class="col-md-4">
             <i class="fas fa-bullseye fa-3x"></i>
             <h3>Our Mission</h3>
             <p>To create a sustainable future through innovation and excellence in technology.</p>
         </div>
+
+        @* Vision statement block *@
         <div class="col-md-4">
             <i class="fas fa-lightbulb fa-3x"></i>
             <h3>Our Vision</h3>
             <p>Empowering businesses with cutting-edge solutions for a brighter tomorrow.</p>
         </div>
+
+        @* Join Us call-to-action block *@
         <div class="col-md-4">
             <i class="fas fa-users fa-3x"></i>
             <h3>Join Us</h3>
@@ -38,6 +46,7 @@
         </div>
     </div>
 
+    @* Call-to-action button for more information *@
     <div class="row mt-5 text-center">
         <div class="col">
             <a href="#" class="btn btn-primary btn-lg">Learn More</a>

@@ -1,21 +1,28 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    // Set the page title and assign the layout for this view
+    ViewData["Title"] = "All Employees";
+    Layout = "_Layout_Employee_GetAllEmployees";
+}
+
 @model IEnumerable<Employee>
 
-
 <head>
+    @* Links to Bootstrap CSS and a custom stylesheet for the GetAllEmployees view *@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/Employee/GetAllEmployees.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/2. EmployeeCSS/GetAllEmployees.css" asp-append-version="true" />
 </head>
 
+@* Main heading for the Employee section *@
 <h2>Employee</h2>
 
-
- <!-- Displays the button to view a single employee -->
+@* Placeholder for a button to view a single employee, to be implemented later *@
 @*<div style="display: block">
     <a href="/Employee/ViewSingleEmployee/">View Employee</a>
 </div> *@
 
-<!-- Search Bar -->
+@* Search bar to filter employees by name or keyword *@
 <form asp-controller="Employee" asp-action="GetAllEmployees" method="get">
     <div class="input-group mb-3">
         <input type="text" name="searchString" class="form-control" placeholder="Search employees..." />
@@ -23,6 +30,7 @@
     </div>
 </form>
 
+@* Placeholder for searching employees by ID, to be implemented later *@
 @*$1$Search By ID#1#
 <form asp-controller="Employee" asp-action="ViewSingleEmployeeById" method="get">
     <div class="input-group mb-3">
@@ -31,11 +39,12 @@
     </div>
 </form>*@
 
-
+@* Placeholder for another View Employee button, to be implemented later *@
 @*<div style="display: block">
     <a href="/Employee/ViewSingleEmployee/">View Employee</a>
 </div>*@
 
+@* Button to reset the search and return to the full employee list when a search is active *@
 @if (!string.IsNullOrEmpty(ViewContext.HttpContext.Request.Query["searchString"]))
 {
     <div class="mt-4">
@@ -43,103 +52,65 @@
     </div>
 }
 
-
+@* Message displayed if no employees are found matching the search criteria *@
 @if (!Model.Any())
 {
-    <p class="text-center text-bg-danger mt-5 p-4 ">No employees found.</p>
+    <p class="text-center text-bg-danger mt-5 p-4">No employees found.</p>
 }
 else
-    
 {
+    @* Wrapper for the employee table *@
     <div id="wrapper">
         <table class="table-responsive-sm text-nowrap">
             <thead class="sticky-top">
                 <tr>
+                    @* Table headers with sorting links for each employee attribute *@
                     <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.IdSortParm">
-                            ID
-                        </a>
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.IdSortParm">ID</a>
                     </th>
                     <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.FirstNameSortParm">
-                            First Name
-                        </a>
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.FirstNameSortParm">First Name</a>
                     </th>
                     <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.MiddleNameSortParm">
-                            Middle Name
-                        </a>
-                    </th>
-                    
-                    <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.LastNameSortParm">
-                            Last Name
-                        </a>
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.MiddleNameSortParm">Middle Name</a>
                     </th>
                     <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.BirthMonthSortParm">
-                            Birth Month
-                        </a>
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.LastNameSortParm">Last Name</a>
                     </th>
                     <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.BirthDaySortParm">
-                            Birth Day
-                        </a>
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.BirthMonthSortParm">Birth Month</a>
                     </th>
                     <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.BirthYearSortParm">
-                            Birth Year
-                        </a>
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.BirthDaySortParm">Birth Day</a>
                     </th>
                     <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.AgeSortParm">
-                            Age
-                        </a>
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.BirthYearSortParm">Birth Year</a>
                     </th>
                     <th class="px-2">
-                    <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.PhoneNumberSortParm">
-                        Phone Number
-                    </a>
-                    </th>
-
-                    
-                    
-                    
-                    
-                    <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.EmailAddressSortParm">
-                            Email Address
-                        </a>
-                    </th>
-                    
-                    
-                    
-                    <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.HomeAddressSortParm">
-                            Home Address
-                        </a>
-                    </th>
-                    
-                    
-                    <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.PayRateSortParm">
-                            Pay Rate
-                        </a>
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.AgeSortParm">Age</a>
                     </th>
                     <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.DepartmentSortParm">
-                            Department
-                        </a>
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.PhoneNumberSortParm">Phone Number</a>
                     </th>
                     <th class="px-2">
-                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.HoursWorkedSortParm">
-                            Hours Worked
-                        </a>
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.EmailAddressSortParm">Email Address</a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.HomeAddressSortParm">Home Address</a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.PayRateSortParm">Pay Rate</a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.DepartmentSortParm">Department</a>
+                    </th>
+                    <th class="px-2">
+                        <a asp-action="GetAllEmployees" asp-route-sortOrder="@ViewBag.HoursWorkedSortParm">Hours Worked</a>
                     </th>
                 </tr>
             </thead>
 
-
+            @* Iterating over each employee in the model to populate table rows *@
             @foreach (var employeesInList in Model)
             {
                 <tr>
@@ -164,4 +135,3 @@ else
         </table>
     </div>
 }
-

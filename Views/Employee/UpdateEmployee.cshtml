@@ -1,10 +1,16 @@
-﻿@model Employee
+﻿@{
+    // Set the page title and assign the layout for this view
+    ViewData["Title"] = "Update Employee";
+    Layout = "_Layout_Employee_UpdateEmployee";
+}
 
+@model Employee
 
+<!-- Page Heading -->
 <h2>Update Employee</h2>
 
+<!-- Form to submit updated employee data to UpdateEmployeeToDatabase action in EmployeeController, using POST method -->
 @using (Html.BeginForm("UpdateEmployeeToDatabase", "Employee", "Post"))
-
 {
     <!-- EmployeeId -->
     <input asp-for="EmployeeId" type="hidden" value=@Model.EmployeeId />

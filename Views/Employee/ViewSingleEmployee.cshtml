@@ -1,36 +1,47 @@
-﻿@using Org.BouncyCastle.Crypto.Engines
+﻿@{
+    // Set the page title and assign the layout for this view
+    ViewData["Title"] = "View Single Employee";
+    Layout = "_Layout_Employee_ViewSingleEmployee";
+}
+
+
+@* Binds the Employee model to this view, allowing access to employee data *@
 @model Employee
 
 <head>
+    <!-- Link to Bootstrap CSS for consistent styling across the page -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/Employee/GetAllEmployees.css" asp-append-version="true" />
+    <!-- Link to custom CSS for styling specific to the GetAllEmployees view, with versioning for cache-busting -->
+    <link rel="stylesheet" href="~/css/2. EmployeeCSS/GetAllEmployees.css" asp-append-version="true" />
 </head>
 
+<!-- Page title or heading for the employee information section -->
 <h3 class="mt-5 mb-3">Employee Information</h3>
 
-
-
 <div>
+    <!-- Responsive table to display employee details -->
     <table class="table-responsive-sm text-nowrap mb-3">
         <thead>
             <tr>
+                <!-- Column headers for each employee attribute -->
                 <th>ID</th>
-                <th class=" px-2">First Name</th>
-                <th class=" px-2">Middle Name</th>
-                <th class=" px-2">Last Name</th>
-                <th class=" px-2">Birth Month</th>
-                <th class=" px-2">Birth Day</th>
-                <th class=" px-2">Birth Year</th>
-                <th class=" px-2">Age</th>
-                <th class=" px-2">Phone Number</th>
-                <th class=" px-2">Email Address</th>
-                <th class=" px-2">Home Address</th>
-                <th class=" px-2">Pay Rate</th>
-                <th class=" px-2">Department</th>
-                <th class=" px-2">Hours Worked</th>
+                <th class="px-2">First Name</th>
+                <th class="px-2">Middle Name</th>
+                <th class="px-2">Last Name</th>
+                <th class="px-2">Birth Month</th>
+                <th class="px-2">Birth Day</th>
+                <th class="px-2">Birth Year</th>
+                <th class="px-2">Age</th>
+                <th class="px-2">Phone Number</th>
+                <th class="px-2">Email Address</th>
+                <th class="px-2">Home Address</th>
+                <th class="px-2">Pay Rate</th>
+                <th class="px-2">Department</th>
+                <th class="px-2">Hours Worked</th>
             </tr>
         </thead>
         <tbody>
+            <!-- Display employee details using the Model properties within the table row -->
             <tr>
                 <td class="border-end px-4">@Model.EmployeeId</td>
                 <td class="border-end px-4">@Model.FirstName</td>
@@ -42,53 +53,31 @@
                 <td class="border-end px-4">@Model.Age</td>
                 <td class="border-end px-4">@Model.PhoneNumber</td>
                 <td class="border-end px-4">@Model.EmailAddress</td>
-                <td class="border-end  px-4">@Model.HomeAddress</td>
+                <td class="border-end px-4">@Model.HomeAddress</td>
                 <td class="border-end px-4">@Model.PayRate</td>
                 <td class="border-end px-4">@Model.EmployeeDepartment</td>
                 <td class="border-end px-4">@Model.HoursWorked</td>
             </tr>
-                
         </tbody>
-
     </table>
 </div>
 
-@*$1$<div class="mb-3" style="display: block">
-    <a href="/Employee/UpdateEmployee/@Model.EmployeeId">Update this Employee</a>
-</div>#1#
-
-
+<!-- Section containing links to update and delete employee records -->
 <div style="display: block">
-    @#1#using (Html.BeginForm("UpdateEmployeeToDatabase", "Employee", "Get"))
-    {
-        <input type="hidden" asp-for="EmployeeId" value="@Model.EmployeeId" />
-        <input type="submit"  value="Update this Employee" />
-    }#1#
+    <!-- Link to update the current employee record; directs to the UpdateEmployee view with EmployeeId in the URL -->
     <div class="mb-3" style="display: block">
-        <a href="/Employee/UpdateEmployee/@Model.EmployeeId">Update this Employee</a>
+        <a href="/Employee/UpdateEmployee/@Model.EmployeeId" class="btn btn-dark" style="background-color: steelblue">
+            Update this Employee
+        </a>
     </div>
 </div>
 
-$1$Good Delete Below#1#
-
 <div style="display: block">
-
-    @using (Html.BeginForm("DeleteEmployee", "Employee", "Post"))
-    {
+    <!-- Form to delete the current employee record; submits a POST request to DeleteEmployee action in EmployeeController -->
+    <form asp-action="DeleteEmployee" asp-controller="Employee" method="post" style="display: inline;">
+        <!-- Hidden input to pass EmployeeId for the delete operation -->
         <input type="hidden" asp-for="EmployeeId" value="@Model.EmployeeId" />
-        <input type="submit" onclick="return confirm('Are you sure?')" value="Delete this Employee" />
-    }
-</div>*@
-
-<div style="display: block">
-    <div class="mb-3" style="display: block">
-        <a href="/Employee/UpdateEmployee/@Model.EmployeeId" class="btn btn-dark" style="background-color:steelblue">Update this Employee</a>
-    </div>
-</div>
-
-<div  style="display: block">
-    <form asp-action="DeleteEmployee" asp-controller="Employee" method="post" style="display:inline;">
-        <input type="hidden" asp-for="EmployeeId" value="@Model.EmployeeId" />
-        <input type="submit" value="Delete this Employee" class="btn btn-dark" style="background-color:crimson" />
+        <!-- Submit button for the delete action -->
+        <input type="submit" value="Delete this Employee" class="btn btn-dark" style="background-color: crimson" />
     </form>
 </div>

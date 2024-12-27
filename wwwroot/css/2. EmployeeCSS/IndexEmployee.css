@@ -1,0 +1,126 @@
+﻿/* ==================== Global Image Styling ==================== */
+
+/* Ensures images cover the full width and have a fixed height */
+img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Crops image to fit without distorting */
+}
+
+
+/* ==================== Body Styling ==================== */
+
+/* General styling for the body element */
+body {
+    font-family: Arial, sans-serif; /* Sets a clean, sans-serif font */
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+    background-color: #f4f4f4; /* Light grey background for the page */
+}
+
+
+/* ==================== Container Styling ==================== */
+
+/* Central container with maximum width and padding */
+.container {
+    max-width: 1200px; /* Limits width for readability */
+    margin: 0 auto; /* Centers container */
+    padding: 20px; /* Adds padding for spacing */
+}
+
+
+/* ==================== Header Styling ==================== */
+
+/* Styles for the header section */
+.header {
+    text-align: center; /* Centers text */
+    padding: 20px 0; /* Vertical padding for spacing */
+    background-color: #333; /* Dark background */
+    color: #fff; /* White text color */
+}
+
+
+/* ==================== Product Grid Styling ==================== */
+
+/* Grid layout for products with responsive columns */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Flexible columns */
+    gap: 20px; /* Space between product cards */
+}
+
+
+/* ==================== Product Card Styling ==================== */
+
+/* Card style for individual products */
+.product-card {
+    background-color: #fff; /* White background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    overflow: hidden; /* Hides overflow for a clean look */
+    transition: transform 0.3s; /* Smooth transition effect */
+}
+
+    /* Hover effect for product card */
+    .product-card:hover {
+        transform: scale(1.05); /* Slight zoom on hover */
+    }
+
+
+/* ==================== Product Image Styling ==================== */
+
+/* Image specific styling within product cards */
+.product-image {
+    width: 100%; /* Full width */
+    height: 200px; /* Fixed height */
+    object-fit: cover; /* Crop image to fill without distortion */
+}
+
+
+/* ==================== Product Information Styling ==================== */
+
+/* Styling for product information section within the card */
+.product-info {
+    padding: 15px; /* Padding for spacing */
+    text-align: center; /* Center-aligns text */
+}
+
+/* Product name styling */
+.product-name {
+    font-size: 18px; /* Larger font for emphasis */
+    font-weight: bold; /* Bold for prominence */
+    margin: 10px 0; /* Spacing around the name */
+}
+
+/* Product description styling */
+.product-description {
+    font-size: 14px; /* Slightly smaller text for description */
+    color: #555; /* Dark grey color for readability */
+    margin-bottom: 10px; /* Space below description */
+}
+
+/* Product price styling */
+.product-price {
+    font-size: 16px; /* Medium font size */
+    color: #e67e22; /* Orange color for visibility */
+    margin-bottom: 15px; /* Space below price */
+}
+
+
+/* ==================== Button Styling ==================== */
+
+/* General button styling for actions */
+.btn {
+    display: inline-block; /* Inline block for button layout */
+    padding: 10px 20px; /* Padding for button size */
+    background-color: #e67e22; /* Orange background */
+    color: #fff; /* White text color */
+    text-decoration: none; /* Removes underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+    /* Hover effect for button */
+    .btn:hover {
+        background-color: #d35400; /* Darker shade of orange on hover */
+    }

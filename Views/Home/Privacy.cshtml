@@ -1,13 +1,21 @@
-﻿
+﻿@{
+    // Set the page title and assign the layout for this view
+    ViewData["Title"] = "Privacy Page";
+    Layout = "_Layout_Home_Index";
+}
 
+@* Container for the Privacy Policy section, centered on the page *@
 <div class="col-6 mx-auto">
     <div class="mt-5">
+        @* Title and last updated date for the Privacy Policy *@
         <h1>Privacy Policy for Project Horizon</h1>
         <p><em>Last updated: @DateTime.Now.Year </em></p>
 
+        @* Introduction section describing the purpose of the Privacy Policy *@
         <h2>1. Introduction</h2>
         <p>Welcome to Project Horizon. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.</p>
 
+        @* Section explaining the types of information collected from users *@
         <h2>2. Information We Collect</h2>
         <p>We collect personal information that you provide to us such as:</p>
         <ul>
@@ -22,6 +30,7 @@
             <li>Usage data</li>
         </ul>
 
+        @* Section explaining how the collected information is used *@
         <h2>3. How We Use Your Information</h2>
         <p>We use your information to:</p>
         <ul>
@@ -31,6 +40,7 @@
             <li>Respond to your inquiries</li>
         </ul>
 
+        @* Section describing with whom the information may be shared *@
         <h2>4. Disclosure of Your Information</h2>
         <p>We may share your information with:</p>
         <ul>
@@ -38,9 +48,11 @@
             <li>Law enforcement agencies when required by law</li>
         </ul>
 
+        @* Section outlining security measures to protect user information *@
         <h2>5. Security of Your Information</h2>
         <p>We use appropriate technical and organizational measures to protect your personal information. However, no method of transmission over the Internet or electronic storage is 100% secure.</p>
 
+        @* Section informing users of their rights concerning personal information *@
         <h2>6. Your Rights</h2>
         <p>Depending on your location, you may have certain rights regarding your personal information, including:</p>
         <ul>
@@ -52,16 +64,19 @@
             <li>The right to object</li>
         </ul>
 
+        @* Section clarifying the policy regarding children's privacy *@
         <h2>7. Children's Privacy</h2>
         <p>Our services are not intended for individuals under the age of 13. We do not knowingly collect personal information from children.</p>
 
+        @* Section about updates to the Privacy Policy *@
         <h2>8. Changes to This Privacy Policy</h2>
         <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
 
+        @* Contact information section for questions regarding the Privacy Policy *@
         <h2>9. Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, please contact us at:</p>
         <p>Phone: 1-800-555-5555</p>
         <p>Email: projecthorizon@projecthorizon.com</p>
-        <p>Mailing address: 5555 Project Horizon Way AllState, AllCity, 55555</p>
+        <p>Mailing address: 5555 Project Horizon Way, AllState, AllCity, 55555</p>
     </div>
 </div>

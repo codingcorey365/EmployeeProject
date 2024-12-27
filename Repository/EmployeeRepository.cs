@@ -1,110 +1,145 @@
-﻿using Dapper;
-using EmployeeProject.Interface;
-using EmployeeProject.Models;
-using System.Data;
+﻿using Dapper; // For simplified data access
+using EmployeeProject.Interface; // To implement repository interface
+using EmployeeProject.Models; // For employee model definitions
+using System.Data; // For database connection interface
 
-namespace EmployeeProject.Repository;
-
-public class EmployeeRepository : IEmployeeRepository
+namespace EmployeeProject.Repository
 {
-    // Create encapsulation
-    // This is a field
-    private readonly IDbConnection _connection;
-
-    // Constructor
-    // sets field to be a private value
-    public EmployeeRepository(IDbConnection connection)
+    // Repository class for employee CRUD operations
+    public class EmployeeRepository : IEmployeeRepository
     {
-        _connection = connection;
-    }
+        /*--- FIELDS AND CONSTRUCTOR ---*/
 
+        // Field to store database connection, encapsulated with readonly modifier
+        private readonly IDbConnection _connection;
 
-    /*--- CRUD OPERATIONS ---*/
+        // Constructor to initialize the database connection via dependency injection
+        public EmployeeRepository(IDbConnection connection)
+        {
+            _connection = connection;
+        }
 
-    /*--- CREATE ---*/
-    /*-------------*/
-    /*------------*/
-    
-    public void CreateEmployee(Employee employeeToInsert)
-    {
-        _connection.Execute("INSERT INTO employees (FirstName, MiddleName, LastName) VALUES (@FirstName, @MiddleName, @LastName);", new { firstname = employeeToInsert.FirstName, middlename = employeeToInsert.MiddleName, lastname = employeeToInsert.LastName });
-    }
+        /*--- CRUD OPERATIONS ---*/
 
-    
-    /*--- READ ---*/
-    /*-----------*/
-    /*----------*/
-    public IEnumerable<Employee> GetAllEmployees()
-    {
-        return _connection.Query<Employee>("SELECT * FROM employees;");
-    }
+        /*--- CREATE ---*/
 
-    public Employee GetEmployeeById(int id)
-    {
+        /// <summary>
+        /// Inserts a new employee record into the database.
+        /// </summary>
+        /// <param name="employeeToInsert">Employee object with details to be inserted</param>
+        public void CreateEmployee(Employee employeeToInsert)
+        {
+            _connection.Execute(
+                "INSERT INTO employees (FirstName, MiddleName, LastName) VALUES (@FirstName, @MiddleName, @LastName);",
+                new
+                {
+                    firstname = employeeToInsert.FirstName,
+                    middlename = employeeToInsert.MiddleName,
+                    lastname = employeeToInsert.LastName
+                });
+        }
 
-        return _connection.QuerySingleOrDefault<Employee>("SELECT * FROM employees where EmployeeId = @id", new { id = id });
-    }
+        /*--- READ ---*/
 
-    public Employee GetEmployeeViewModelById(int id)
-    {
+        /// <summary>
+        /// Retrieves all employee records from the database.
+        /// </summary>
+        /// <returns>A collection of Employee objects</returns>
+        public IEnumerable<Employee> GetAllEmployees()
+        {
+            return _connection.Query<Employee>("SELECT * FROM employees;");
+        }
 
-        return _connection.QuerySingleOrDefault<Employee>("SELECT * FROM employees where EmployeeId = @id", new { id = id });
-    }
+        /// <summary>
+        /// Retrieves a single employee by their unique ID.
+        /// </summary>
+        /// <param name="id">Employee's unique ID</param>
+        /// <returns>Employee object if found; otherwise null</returns>
+        public Employee GetEmployeeById(int id)
+        {
+            return _connection.QuerySingleOrDefault<Employee>(
+                "SELECT * FROM employees WHERE EmployeeId = @id", new { id });
+        }
 
-    /*--- UPDATE ---*/
-    /*-------------*/
-    /*------------*/
-    public void UpdateEmployee(Employee employee)
-    {
-        _connection.Execute(@"UPDATE employees 
-                      SET FirstName = @FirstName, 
-                          MiddleName = @MiddleName, 
-                          LastName = @LastName, 
-                          BirthDay = @BirthDay, 
-                          BirthMonth = @BirthMonth, 
-                          BirthYear = @BirthYear, 
-                          Age = @Age, 
-                          PhoneNumber = @PhoneNumber, 
-                          EmailAddress = @EmailAddress, 
-                          HomeAddress = @HomeAddress, 
-                          EmployeeDepartment = @EmployeeDepartment, 
-                          EmployeeTitle = @EmployeeTitle, 
-                          PayRate = @PayRate, 
-                          HoursWorked = @HoursWorked 
-                      WHERE EmployeeId = @EmployeeId",
-            new
-            {
-                employee.FirstName,
-                employee.MiddleName,
-                employee.LastName,
-                employee.BirthDay,
-                employee.BirthMonth,
-                employee.BirthYear,
-                employee.Age,
-                employee.PhoneNumber,
-                employee.EmailAddress,
-                employee.HomeAddress,
-                employee.EmployeeDepartment,
-                employee.EmployeeTitle,
-                employee.PayRate,
-                employee.HoursWorked,
-                employee.EmployeeId
-            });
-    }
+        /// <summary>
+        /// Retrieves an employee as a view model by their unique ID.
+        /// </summary>
+        /// <param name="id">Employee's unique ID</param>
+        /// <returns>Employee view model object if found; otherwise null</returns>
+        public Employee GetEmployeeViewModelById(int id)
+        {
+            return _connection.QuerySingleOrDefault<Employee>(
+                "SELECT * FROM employees WHERE EmployeeId = @id", new { id });
+        }
 
-    public void UpdateEmployeeName(int employeeId, string updatedName)
-    {
-        _connection.Execute("Update employees set Name = @name where employeeId = @employeeId",
-            new { name = updatedName, employeeId = employeeId });
-    }
+        /*--- UPDATE ---*/
 
+        /// <summary>
+        /// Updates the full details of an existing employee record in the database.
+        /// </summary>
+        /// <param name="employee">Employee object containing updated information</param>
+        public void UpdateEmployee(Employee employee)
+        {
+            _connection.Execute(
+                @"UPDATE employees 
+                  SET FirstName = @FirstName, 
+                      MiddleName = @MiddleName, 
+                      LastName = @LastName, 
+                      BirthDay = @BirthDay, 
+                      BirthMonth = @BirthMonth, 
+                      BirthYear = @BirthYear, 
+                      Age = @Age, 
+                      PhoneNumber = @PhoneNumber, 
+                      EmailAddress = @EmailAddress, 
+                      HomeAddress = @HomeAddress, 
+                      EmployeeDepartment = @EmployeeDepartment, 
+                      EmployeeTitle = @EmployeeTitle, 
+                      PayRate = @PayRate, 
+                      HoursWorked = @HoursWorked 
+                  WHERE EmployeeId = @EmployeeId",
+                new
+                {
+                    employee.FirstName,
+                    employee.MiddleName,
+                    employee.LastName,
+                    employee.BirthDay,
+                    employee.BirthMonth,
+                    employee.BirthYear,
+                    employee.Age,
+                    employee.PhoneNumber,
+                    employee.EmailAddress,
+                    employee.HomeAddress,
+                    employee.EmployeeDepartment,
+                    employee.EmployeeTitle,
+                    employee.PayRate,
+                    employee.HoursWorked,
+                    employee.EmployeeId
+                });
+        }
 
-    /*--- DELETE ---*/
-    /*-------------*/
-    /*------------*/
+        /// <summary>
+        /// Updates only the name of an existing employee.
+        /// </summary>
+        /// <param name="employeeId">Employee's unique ID</param>
+        /// <param name="updatedName">New name for the employee</param>
+        public void UpdateEmployeeName(int employeeId, string updatedName)
+        {
+            _connection.Execute(
+                "UPDATE employees SET Name = @name WHERE EmployeeId = @employeeId",
+                new { name = updatedName, employeeId });
+        }
 
-    public void DeleteEmployee(Employee employee)
-    {
-        _connection.Execute("DELETE FROM EMPLOYEES WHERE EmployeeId = @id;", new { id = employee.EmployeeId });
+        /*--- DELETE ---*/
+
+        /// <summary>
+        /// Deletes an employee record from the database.
+        /// </summary>
+        /// <param name="employee">Employee object with ID of the record to delete</param>
+        public void DeleteEmployee(Employee employee)
+        {
+            _connection.Execute(
+                "DELETE FROM employees WHERE EmployeeId = @id;",
+                new { id = employee.EmployeeId });
+        }
     }
 }

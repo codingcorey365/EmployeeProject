@@ -1,8 +1,11 @@
-﻿namespace EmployeeProject.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EmployeeProject.Models;
 
 public class Employee
 {
     //EmployeeID
+    [Required]
     public int EmployeeId { get; set; }
 
     //Name
@@ -11,6 +14,7 @@ public class Employee
     public string? LastName { get; set; }
 
     //Birthday
+    [Required]
     public int BirthDay { get; set; }
     public int BirthMonth { get; set; }
     public int BirthYear { get; set; }
@@ -24,6 +28,7 @@ public class Employee
     public string? HomeAddress { get; set; }
 
     //Current Position
+    [Required]
     public string? EmployeeDepartment { get; set; }
     public int EmployeeTitle { get; set; }
     public int PayRate { get; set; }
