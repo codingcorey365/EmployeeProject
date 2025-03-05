@@ -3,16 +3,10 @@
 @{
     // Set the page title and assign the layout for this view
     ViewData["Title"] = "All Employees";
-    Layout = "_Layout_Employee_GetAllEmployees";
 }
 
 @model IEnumerable<Employee>
 
-<head>
-    @* Links to Bootstrap CSS and a custom stylesheet for the GetAllEmployees view *@
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/2. EmployeeCSS/GetAllEmployees.css" asp-append-version="true" />
-</head>
 
 @* Main heading for the Employee section *@
 <h2>Employee</h2>

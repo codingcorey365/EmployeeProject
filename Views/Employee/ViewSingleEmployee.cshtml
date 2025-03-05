@@ -1,19 +1,11 @@
 ﻿@{
     // Set the page title and assign the layout for this view
     ViewData["Title"] = "View Single Employee";
-    Layout = "_Layout_Employee_ViewSingleEmployee";
 }
 
 
 @* Binds the Employee model to this view, allowing access to employee data *@
 @model Employee
-
-<head>
-    <!-- Link to Bootstrap CSS for consistent styling across the page -->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <!-- Link to custom CSS for styling specific to the GetAllEmployees view, with versioning for cache-busting -->
-    <link rel="stylesheet" href="~/css/2. EmployeeCSS/GetAllEmployees.css" asp-append-version="true" />
-</head>
 
 <!-- Page title or heading for the employee information section -->
 <h3 class="mt-5 mb-3">Employee Information</h3>
