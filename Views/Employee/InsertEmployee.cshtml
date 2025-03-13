@@ -22,14 +22,17 @@
     <input asp-for="EmployeeId" type="hidden" value=""/>
 
     <!-- Name: First, Middle, Last -->
-    <label asp-for="FirstName" class="control-label">First Name</label>
-    <input type="text" name="FirstName" class="form-control" value="" placeholder="Example: John"/>
+    <label asp-for="FirstName" class="form-label mb-1">First Name</label>
+    <input type="text" name="FirstName" class="form-control mb-1" value="" placeholder="Example: John" required/>
+    <span asp-validation-for="FirstName" class="text-danger"></span>
 
-    <label asp-for="MiddleName" class="control-label">Middle Name</label>
-    <input type="text" name="MiddleName" class="form-control" placeholder="Example: Michael"/>
+    <label asp-for="MiddleName" class="form-label mb-1">Middle Name</label>
+    <input type="text" name="MiddleName" class="form-control mb-1" placeholder="Example: Michael" required/>
+    <span asp-validation-for="MiddleName" class="text-danger"></span>
 
-    <label asp-for="LastName" class="control-label">Last Name</label>
-    <input type="text" name="LastName" class="form-control" placeholder="Example: Smith"/>
+    <label asp-for="LastName" class="form-label mb-1">Last Name</label>
+    <input type="text" name="LastName" class="form-control " placeholder="Example: Smith" required/>
+    <span asp-validation-for="LastName" class="text-danger"></span>
 
     <!-- Birth Information -->
     <label asp-for="BirthDay" class="control-label">Birth Day</label>
@@ -70,4 +73,8 @@
 
     <!-- Submit -->
     <input type="submit" value="Create Employee" class="btn btn-primary"/>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
