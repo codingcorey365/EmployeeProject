@@ -37,7 +37,8 @@ namespace EmployeeProject.Interface
         public void DeleteEmployee(Employee employee);
 
         /// <summary>
-        /// Retrieves an employee's data formatted for a view model by their unique ID.
+        /// Retrieves an employee's data formatted for a
+        /// model by their unique ID.
         /// </summary>
         /// <param name="id">The unique ID of the employee</param>
         /// <returns>An Employee view model object if found, otherwise null</returns>

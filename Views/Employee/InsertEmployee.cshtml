@@ -6,7 +6,7 @@
 @model Employee
 
 <!-- Page Heading -->
-<h2>Create a New Employee</h2>
+<h2 class="display-4 mb-3 p-1 text-center">Create a New Employee</h2>
 
 @* @if (ViewData["ErrorMessage"] != null)
 {
@@ -19,62 +19,75 @@
 @using (Html.BeginForm("InsertEmployeeToDatabase", "Employee", "Post"))
 {
     <!-- EmployeeId -->
-    <input asp-for="EmployeeId" type="hidden" value=""/>
+    <input asp-for="EmployeeId" type="hidden"/>
 
-    <!-- Name: First, Middle, Last -->
-    <label asp-for="FirstName" class="form-label mb-1">First Name</label>
-    <input type="text" name="FirstName" class="form-control mb-1" value="" placeholder="Example: John" required/>
-    <span asp-validation-for="FirstName" class="text-danger"></span>
-
-    <label asp-for="MiddleName" class="form-label mb-1">Middle Name</label>
-    <input type="text" name="MiddleName" class="form-control mb-1" placeholder="Example: Michael" required/>
-    <span asp-validation-for="MiddleName" class="text-danger"></span>
-
-    <label asp-for="LastName" class="form-label mb-1">Last Name</label>
-    <input type="text" name="LastName" class="form-control " placeholder="Example: Smith" required/>
-    <span asp-validation-for="LastName" class="text-danger"></span>
-
+    <!-- asp-for: First, Middle, Last -->
+    <label asp-for="FirstName" class="form-label mb-2">First Name</label>
+    <input asp-for="FirstName" type="text" class="form-control mb-1" placeholder="Example: John" required/>
+    <div class="mb-4"><span asp-validation-for="FirstName" class="text-danger"></span></div>
+    
+    <label asp-for="MiddleName" class="form-label mb-2">Middle Name</label>
+    <input asp-for="MiddleName" type="text" class="form-control mb-1" placeholder="Example: Michael" required/>
+    <div class="mb-4"><span asp-validation-for="MiddleName" class="text-danger"></span></div>
+    
+    <label asp-for="LastName" class="form-label mb-2">Last Name</label>
+    <input asp-for="LastName" type="text" class="form-control mb-1" placeholder="Example: Smith" required />
+    <div class="mb-4"><span asp-validation-for="LastName" class="text-danger"></span></div>
+    
     <!-- Birth Information -->
-    <label asp-for="BirthDay" class="control-label">Birth Day</label>
-    <input type="number" name="BirthDay" class="form-control" placeholder="Example: 1"/>
+    <label asp-for="BirthDay" class="form-label mb-2">Birth Day</label>
+    <input type="number" asp-for="BirthDay" class="form-control mb-1" placeholder="Example: 1" />
+    <div class="mb-4"><span asp-validation-for="BirthDay" class="text-danger"></span></div>
 
-    <label asp-for="BirthMonth" class="control-label">Birth Month</label>
-    <input type="number" name="BirthMonth" class="form-control" placeholder="Example: 1" />
+    <label asp-for="BirthMonth" class="form-label mb-2">Birth Month</label>
+    <input type="number" asp-for="BirthMonth" class="form-control mb-1" placeholder="Example: 1" />
+    <div class="mb-3"><span asp-validation-for="BirthMonth" class="text-danger"></span></div>
 
-    <label asp-for="BirthYear" class="control-label">Birth Year</label>
-    <input type="number" name="BirthYear" class="form-control" placeholder="Example: 1985"/>
+    <label asp-for="BirthYear" class="form-label mb-2">Birth Year</label>
+    <input type="number" asp-for="BirthYear" class="form-control mb-1" placeholder="Example: 1985" />
+    <div class="mb-3"><span asp-validation-for="BirthYear" class="text-danger"></span></div>
 
     <!-- Age -->
-    <label asp-for="Age" class="control-label">Age</label>
-    <input type="number" name="Age" class="form-control" placeholder="Example: 39"/>
+    <label asp-for="Age" class="form-label mb-2">Age</label>
+    <input type="number" asp-for="Age" class="form-control mb-1" placeholder="Example: 39" />
+    <div class="mb-3"><span asp-validation-for="Age" class="text-danger"></span></div>
 
     <!-- Contact Information -->
-    <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
-    <input type="text" name="PhoneNumber" class="form-control" placeholder="Example: 555-555-5555"/>
+    <label asp-for="PhoneNumber" class="form-label mb-2">Phone Number</label>
+    <input type="text" asp-for="PhoneNumber" class="form-control mb-1" placeholder="Example: 555-555-5555" />
+    <div class="mb-3"><span asp-validation-for="PhoneNumber" class="text-danger"></span></div>
 
-    <label asp-for="EmailAddress" class="control-label">Email Address</label>
-    <input type="email" name="EmailAddress" class="form-control" placeholder="Example: JohnSmith@AnEmail.com"/>
+    <label asp-for="EmailAddress" class="form-label mb-2">Email Address</label>
+    <input type="email" asp-for="EmailAddress" class="form-control mb-1" placeholder="Example: JohnSmith@AnEmail.com"/>
+    <div class="mb-3"><span asp-validation-for="EmailAddress" class="text-danger"></span></div>
 
-    <label asp-for="HomeAddress" class="control-label">Home Address</label>
-    <input type="text" name="HomeAddress" class="form-control" placeholder="Example: 1234 JohnSmith Way"/>
+    <label asp-for="HomeAddress" class="form-label mb-2">Home Address</label>
+    <input type="text" asp-for="HomeAddress" class="form-control mb-1" placeholder="Example: 1234 JohnSmith Way" />
+    <div class="mb-3"><span asp-validation-for="HomeAddress" class="text-danger"></span></div>
 
     <!-- Current Position -->
-    <label asp-for="EmployeeDepartment" class="control-label">Department</label>
-    <input type="text" name="EmployeeDepartment" class="form-control" placeholder="Example: Electronics"/>
+    <label asp-for="EmployeeDepartment" class="form-label mb-2">Department</label>
+    <input type="text" asp-for="EmployeeDepartment" class="form-control mb-1" placeholder="Example: Electronics" />
+    <div class="mb-3"><span asp-validation-for="EmployeeDepartment" class="text-danger"></span></div>
 
-    <label asp-for="EmployeeTitle" class="control-label">Title</label>
-    <input type="number" name="EmployeeTitle" class="form-control" placeholder="Example: 1"/>
+    <label asp-for="EmployeeTitle" class="form-label mb-2">Title (e.g., 1 = Manager, 2 = Supervisor, etc.)</label>
+    <input type="number" asp-for="EmployeeTitle" class="form-control mb-1" placeholder="Example: 1" />
+    <div class="mb-3"><span asp-validation-for="EmployeeTitle" class="text-danger"></span></div>
 
-    <label asp-for="PayRate" class="control-label">Pay Rate</label>
-    <input type="number" name="PayRate" class="form-control" placeholder="Example: 20.00"/>
+    <label asp-for="PayRate" class="form-label mb-2">Pay Rate</label>
+    <input type="number" asp-for="PayRate" class="form-control mb-1" placeholder="Example: 20.00" />
+        <div class="mb-3"><span asp-validation-for="PayRate" class="text-danger"></span></div>
 
-    <label asp-for="HoursWorked" class="control-label">Hours Worked</label>
-    <input type="number" name="HoursWorked" class="form-control" placeholder="Example: 0"/>
+    <label asp-for="HoursWorked" class="form-label mb-2">Hours Worked</label>
+    <input type="number" asp-for="HoursWorked" class="form-control mb-1" placeholder="Example: 0" />
+    <div class="mb-3"><span asp-validation-for="HoursWorked" class="text-danger"></span></div>
 
     <!-- Submit -->
     <input type="submit" value="Create Employee" class="btn btn-primary"/>
 }
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

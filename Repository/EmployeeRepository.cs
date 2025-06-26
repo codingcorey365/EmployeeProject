@@ -30,12 +30,53 @@ namespace EmployeeProject.Repository
         public void CreateEmployee(Employee employeeToInsert)
         {
             _connection.Execute(
-                "INSERT INTO employees (FirstName, MiddleName, LastName) VALUES (@FirstName, @MiddleName, @LastName);",
+                @"INSERT INTO employees (
+                                                FirstName,
+                                                MiddleName,
+                                                LastName,
+                                                BirthDay,
+                                                BirthMonth,
+                                                BirthYear,
+                                                Age,
+                                                PhoneNumber,
+                                                EmailAddress,
+                                                HomeAddress,
+                                                EmployeeDepartment,
+                                                EmployeeTitle,
+                                                PayRate,
+                                                HoursWorked
+                                            ) VALUES (
+                                                @FirstName,
+                                                @MiddleName,
+                                                @LastName,
+                                                @BirthDay,
+                                                @BirthMonth,
+                                                @BirthYear,
+                                                @Age,
+                                                @PhoneNumber,
+                                                @EmailAddress,
+                                                @HomeAddress,
+                                                @EmployeeDepartment,
+                                                @EmployeeTitle,
+                                                @PayRate,
+                                                @HoursWorked
+                                            );",
                 new
                 {
-                    firstname = employeeToInsert.FirstName,
-                    middlename = employeeToInsert.MiddleName,
-                    lastname = employeeToInsert.LastName
+                    FirstName = employeeToInsert.FirstName,
+                    MiddleName = employeeToInsert.MiddleName,
+                    LastName = employeeToInsert.LastName,
+                    BirthDay = employeeToInsert.BirthDay,
+                    BirthMonth = employeeToInsert.BirthMonth,
+                    BirthYear = employeeToInsert.BirthYear,
+                    Age = employeeToInsert.Age,
+                    PhoneNumber = employeeToInsert.PhoneNumber,
+                    EmailAddress = employeeToInsert.EmailAddress,
+                    HomeAddress = employeeToInsert.HomeAddress,
+                    EmployeeDepartment = employeeToInsert.EmployeeDepartment,
+                    EmployeeTitle = employeeToInsert.EmployeeTitle,
+                    PayRate = employeeToInsert.PayRate,
+                    HoursWorked = employeeToInsert.HoursWorked
                 });
         }
 
@@ -62,7 +103,8 @@ namespace EmployeeProject.Repository
         }
 
         /// <summary>
-        /// Retrieves an employee as a view model by their unique ID.
+        /// Retrieves an employee as a
+        /// model by their unique ID.
         /// </summary>
         /// <param name="id">Employee's unique ID</param>
         /// <returns>Employee view model object if found; otherwise null</returns>

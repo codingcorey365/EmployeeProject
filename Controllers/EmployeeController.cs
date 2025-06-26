@@ -31,6 +31,7 @@ namespace EmployeeProject.Controllers
             return View();
         }
 
+        [HttpPost]
         // Adds a new employee to the database and redirects to GetAllEmployees view
         public IActionResult InsertEmployeeToDatabase(Employee employeeToInsert)
         {
